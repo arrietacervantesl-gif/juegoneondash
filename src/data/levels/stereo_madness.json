@@ -1,0 +1,42 @@
+{
+  "id": "level_1_stereo_madness",
+  "name": "Stereo Madness",
+  "subtitle": "Nivel 1 - Introducción al Ritmo",
+  "difficulty": "Easy",
+  "speedKey": "1x",
+  "stars": 1,
+  "totalLength": 5600,
+  "obstacles": [
+    { "type": "SPIKE", "x": 800, "y": 512, "width": 48, "height": 48, "flipped": false },
+    { "type": "SPIKE", "x": 1300, "y": 512, "width": 48, "height": 48, "flipped": false },
+    { "type": "BLOCK", "x": 1700, "y": 512, "width": 48, "height": 48 },
+    { "type": "BLOCK", "x": 1748, "y": 512, "width": 48, "height": 48 },
+    { "type": "BLOCK", "x": 1796, "y": 512, "width": 48, "height": 48 },
+    { "type": "SPIKE", "x": 1892, "y": 512, "width": 48, "height": 48, "flipped": false },
+    { "type": "SPIKE", "x": 2300, "y": 512, "width": 48, "height": 48, "flipped": false },
+    { "type": "SPIKE", "x": 2348, "y": 512, "width": 48, "height": 48, "flipped": false },
+    { "type": "BLOCK", "x": 2600, "y": 512, "width": 48, "height": 48 },
+    { "type": "BLOCK", "x": 2648, "y": 512, "width": 48, "height": 48 },
+    { "type": "BLOCK", "x": 3100, "y": 512, "width": 48, "height": 48 },
+    { "type": "BLOCK", "x": 3196, "y": 464, "width": 48, "height": 48 },
+    { "type": "BLOCK", "x": 3244, "y": 464, "width": 48, "height": 48 },
+    { "type": "BLOCK", "x": 3292, "y": 464, "width": 48, "height": 48 },
+    { "type": "SPIKE", "x": 3800, "y": 512, "width": 48, "height": 48, "flipped": false },
+    { "type": "SPIKE", "x": 3848, "y": 512, "width": 48, "height": 48, "flipped": false },
+    { "type": "BLOCK", "x": 4400, "y": 464, "width": 48, "height": 48 },
+    { "type": "BLOCK", "x": 4448, "y": 464, "width": 48, "height": 48 },
+    { "type": "SPIKE", "x": 4544, "y": 512, "width": 48, "height": 48, "flipped": false }
+  ],
+  "triggers": [
+    { "type": "PORTAL_SPEED", "x": 200, "y": 380, "width": 44, "height": 170, "speedKey": "1x" }
+  ],
+  "orbs": [
+    { "type": "ORB", "x": 2324, "y": 450, "orbType": "YELLOW" },
+    { "type": "ORB", "x": 4100, "y": 464, "orbType": "YELLOW" }
+  ],
+  "coins": [
+    { "type": "COIN", "x": 1748, "y": 392, "id": 1 },
+    { "type": "COIN", "x": 2324, "y": 358, "id": 2 },
+    { "type": "COIN", "x": 4448, "y": 358, "id": 3 }
+  ]
+}

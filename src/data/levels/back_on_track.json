@@ -1,0 +1,45 @@
+{
+  "id": "level_2_back_on_track",
+  "name": "Back On Track",
+  "subtitle": "Nivel 2 - Inversión de Gravedad & Aceleración",
+  "difficulty": "Normal",
+  "speedKey": "1x",
+  "stars": 2,
+  "totalLength": 6800,
+  "obstacles": [
+    { "type": "SPIKE", "x": 750, "y": 512, "width": 48, "height": 48, "flipped": false },
+    { "type": "BLOCK", "x": 1100, "y": 512, "width": 48, "height": 48 },
+    { "type": "BLOCK", "x": 1148, "y": 464, "width": 48, "height": 48 },
+    { "type": "BLOCK", "x": 1196, "y": 464, "width": 48, "height": 48 },
+    { "type": "SPIKE", "x": 1550, "y": 512, "width": 48, "height": 48, "flipped": false },
+    { "type": "SPIKE", "x": 1598, "y": 512, "width": 48, "height": 48, "flipped": false },
+    { "type": "SPIKE", "x": 2750, "y": 160, "width": 48, "height": 48, "flipped": true },
+    { "type": "BLOCK", "x": 3100, "y": 160, "width": 48, "height": 48 },
+    { "type": "BLOCK", "x": 3148, "y": 208, "width": 48, "height": 48 },
+    { "type": "BLOCK", "x": 3196, "y": 208, "width": 48, "height": 48 },
+    { "type": "SPIKE", "x": 3600, "y": 160, "width": 48, "height": 48, "flipped": true },
+    { "type": "SPIKE", "x": 3648, "y": 160, "width": 48, "height": 48, "flipped": true },
+    { "type": "BLOCK", "x": 4700, "y": 512, "width": 48, "height": 48 },
+    { "type": "BLOCK", "x": 4796, "y": 464, "width": 48, "height": 48 },
+    { "type": "SPIKE", "x": 5200, "y": 512, "width": 48, "height": 48, "flipped": false },
+    { "type": "SPIKE", "x": 5248, "y": 512, "width": 48, "height": 48, "flipped": false },
+    { "type": "SPIKE", "x": 5800, "y": 512, "width": 48, "height": 48, "flipped": false },
+    { "type": "SPIKE", "x": 5848, "y": 512, "width": 48, "height": 48, "flipped": false },
+    { "type": "SPIKE", "x": 5896, "y": 512, "width": 48, "height": 48, "flipped": false }
+  ],
+  "triggers": [
+    { "type": "PORTAL_GRAVITY", "x": 2200, "y": 370, "width": 44, "height": 170, "targetGravity": -1 },
+    { "type": "PORTAL_GRAVITY", "x": 4100, "y": 180, "width": 44, "height": 170, "targetGravity": 1 },
+    { "type": "PORTAL_SPEED", "x": 4350, "y": 380, "width": 44, "height": 170, "speedKey": "2x" }
+  ],
+  "orbs": [
+    { "type": "ORB", "x": 1850, "y": 454, "orbType": "YELLOW" },
+    { "type": "ORB", "x": 3900, "y": 280, "orbType": "YELLOW" },
+    { "type": "ORB", "x": 5500, "y": 445, "orbType": "YELLOW" }
+  ],
+  "coins": [
+    { "type": "COIN", "x": 1148, "y": 358, "id": 1 },
+    { "type": "COIN", "x": 3172, "y": 323, "id": 2 },
+    { "type": "COIN", "x": 5848, "y": 378, "id": 3 }
+  ]
+}

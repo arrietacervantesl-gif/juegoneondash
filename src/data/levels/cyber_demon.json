@@ -1,0 +1,59 @@
+{
+  "id": "level_3_cyber_demon",
+  "name": "Cyber Demon",
+  "subtitle": "Nivel 3 - Clímax de Dificultad Extrema",
+  "difficulty": "Demon",
+  "speedKey": "2x",
+  "stars": 5,
+  "totalLength": 7800,
+  "obstacles": [
+    { "type": "SPIKE", "x": 700, "y": 512, "width": 48, "height": 48, "flipped": false },
+    { "type": "SPIKE", "x": 748, "y": 512, "width": 48, "height": 48, "flipped": false },
+    { "type": "BLOCK", "x": 1100, "y": 512, "width": 48, "height": 48 },
+    { "type": "BLOCK", "x": 1148, "y": 464, "width": 48, "height": 48 },
+    { "type": "SPIKE", "x": 1500, "y": 512, "width": 48, "height": 48, "flipped": false },
+    { "type": "SPIKE", "x": 1548, "y": 512, "width": 48, "height": 48, "flipped": false },
+    { "type": "SPIKE", "x": 2350, "y": 160, "width": 48, "height": 48, "flipped": true },
+    { "type": "SPIKE", "x": 2398, "y": 160, "width": 48, "height": 48, "flipped": true },
+    { "type": "BLOCK", "x": 2700, "y": 160, "width": 48, "height": 48 },
+    { "type": "BLOCK", "x": 2748, "y": 208, "width": 48, "height": 48 },
+    { "type": "BLOCK", "x": 2796, "y": 208, "width": 48, "height": 48 },
+    { "type": "SPIKE", "x": 3200, "y": 160, "width": 48, "height": 48, "flipped": true },
+    { "type": "SPIKE", "x": 4000, "y": 512, "width": 48, "height": 48, "flipped": false },
+    { "type": "SPIKE", "x": 4048, "y": 512, "width": 48, "height": 48, "flipped": false },
+    { "type": "SPIKE", "x": 4096, "y": 512, "width": 48, "height": 48, "flipped": false },
+    { "type": "BLOCK", "x": 4600, "y": 512, "width": 48, "height": 48 },
+    { "type": "BLOCK", "x": 4648, "y": 512, "width": 48, "height": 48 },
+    { "type": "BLOCK", "x": 5050, "y": 160, "width": 48, "height": 144 },
+    { "type": "SPIKE", "x": 5050, "y": 304, "width": 48, "height": 48, "flipped": true },
+    { "type": "BLOCK", "x": 5400, "y": 368, "width": 48, "height": 192 },
+    { "type": "SPIKE", "x": 5400, "y": 320, "width": 48, "height": 48, "flipped": false },
+    { "type": "BLOCK", "x": 5750, "y": 160, "width": 48, "height": 144 },
+    { "type": "SPIKE", "x": 5750, "y": 304, "width": 48, "height": 48, "flipped": true },
+    { "type": "BLOCK", "x": 6100, "y": 368, "width": 48, "height": 192 },
+    { "type": "SPIKE", "x": 6100, "y": 320, "width": 48, "height": 48, "flipped": false },
+    { "type": "BLOCK", "x": 6700, "y": 512, "width": 48, "height": 48 },
+    { "type": "BLOCK", "x": 6748, "y": 512, "width": 48, "height": 48 },
+    { "type": "BLOCK", "x": 6796, "y": 512, "width": 48, "height": 48 },
+    { "type": "SPIKE", "x": 7100, "y": 512, "width": 48, "height": 48, "flipped": false },
+    { "type": "SPIKE", "x": 7148, "y": 512, "width": 48, "height": 48, "flipped": false }
+  ],
+  "triggers": [
+    { "type": "PORTAL_SPEED", "x": 200, "y": 380, "width": 44, "height": 170, "speedKey": "2x" },
+    { "type": "PORTAL_GRAVITY", "x": 1900, "y": 370, "width": 44, "height": 170, "targetGravity": -1 },
+    { "type": "PORTAL_GRAVITY", "x": 3600, "y": 180, "width": 44, "height": 170, "targetGravity": 1 },
+    { "type": "PORTAL_SPEED", "x": 4400, "y": 380, "width": 44, "height": 170, "speedKey": "3x" },
+    { "type": "PORTAL_GAMEMODE", "x": 4700, "y": 350, "width": 44, "height": 170, "targetMode": "SHIP" },
+    { "type": "PORTAL_GAMEMODE", "x": 6600, "y": 350, "width": 44, "height": 170, "targetMode": "CUBE" }
+  ],
+  "orbs": [
+    { "type": "ORB", "x": 1800, "y": 450, "orbType": "YELLOW" },
+    { "type": "ORB", "x": 3450, "y": 280, "orbType": "YELLOW" },
+    { "type": "ORB", "x": 4048, "y": 440, "orbType": "YELLOW" }
+  ],
+  "coins": [
+    { "type": "COIN", "x": 1148, "y": 354, "id": 1 },
+    { "type": "COIN", "x": 2772, "y": 323, "id": 2 },
+    { "type": "COIN", "x": 6448, "y": 378, "id": 3 }
+  ]
+}

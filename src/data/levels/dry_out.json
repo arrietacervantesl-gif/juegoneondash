@@ -1,0 +1,53 @@
+{
+  "id": "level_3_dry_out",
+  "name": "Dry Out",
+  "subtitle": "Nivel 3 - Saltos Sincronizados y Gravedad Invertida",
+  "difficulty": "Hard",
+  "speedKey": "1x",
+  "stars": 4,
+  "totalLength": 6400,
+  "obstacles": [
+    { "type": "SPIKE", "x": 700, "y": 512, "width": 48, "height": 48, "flipped": false },
+    { "type": "BLOCK", "x": 1050, "y": 512, "width": 48, "height": 48 },
+    { "type": "BLOCK", "x": 1098, "y": 464, "width": 48, "height": 48 },
+    { "type": "BLOCK", "x": 1146, "y": 464, "width": 48, "height": 48 },
+    { "type": "SPIKE", "x": 1450, "y": 512, "width": 48, "height": 48, "flipped": false },
+    { "type": "SPIKE", "x": 1498, "y": 512, "width": 48, "height": 48, "flipped": false },
+    { "type": "BLOCK", "x": 1900, "y": 512, "width": 48, "height": 48 },
+    { "type": "BLOCK", "x": 1948, "y": 464, "width": 48, "height": 48 },
+    { "type": "BLOCK", "x": 1996, "y": 416, "width": 48, "height": 48 },
+    { "type": "SPIKE", "x": 2550, "y": 160, "width": 48, "height": 48, "flipped": true },
+    { "type": "BLOCK", "x": 2850, "y": 160, "width": 48, "height": 48 },
+    { "type": "BLOCK", "x": 2898, "y": 208, "width": 48, "height": 48 },
+    { "type": "SPIKE", "x": 3350, "y": 160, "width": 48, "height": 48, "flipped": true },
+    { "type": "SPIKE", "x": 3398, "y": 160, "width": 48, "height": 48, "flipped": true },
+    { "type": "BLOCK", "x": 4100, "y": 512, "width": 48, "height": 48 },
+    { "type": "BLOCK", "x": 4148, "y": 512, "width": 48, "height": 48 },
+    { "type": "BLOCK", "x": 4500, "y": 160, "width": 48, "height": 96 },
+    { "type": "SPIKE", "x": 4500, "y": 256, "width": 48, "height": 48, "flipped": true },
+    { "type": "BLOCK", "x": 4760, "y": 416, "width": 48, "height": 144 },
+    { "type": "SPIKE", "x": 4760, "y": 368, "width": 48, "height": 48, "flipped": false },
+    { "type": "BLOCK", "x": 5020, "y": 160, "width": 48, "height": 96 },
+    { "type": "SPIKE", "x": 5020, "y": 256, "width": 48, "height": 48, "flipped": true },
+    { "type": "BLOCK", "x": 5400, "y": 512, "width": 48, "height": 48 },
+    { "type": "BLOCK", "x": 5448, "y": 512, "width": 48, "height": 48 },
+    { "type": "BLOCK", "x": 5496, "y": 512, "width": 48, "height": 48 },
+    { "type": "SPIKE", "x": 5750, "y": 512, "width": 48, "height": 48, "flipped": false }
+  ],
+  "triggers": [
+    { "type": "PORTAL_SPEED", "x": 200, "y": 380, "width": 44, "height": 170, "speedKey": "1x" },
+    { "type": "PORTAL_GRAVITY", "x": 2250, "y": 370, "width": 44, "height": 170, "targetGravity": -1 },
+    { "type": "PORTAL_GRAVITY", "x": 3750, "y": 180, "width": 44, "height": 170, "targetGravity": 1 },
+    { "type": "PORTAL_GAMEMODE", "x": 4200, "y": 360, "width": 44, "height": 170, "targetMode": "SHIP" },
+    { "type": "PORTAL_GAMEMODE", "x": 5300, "y": 360, "width": 44, "height": 170, "targetMode": "CUBE" }
+  ],
+  "orbs": [
+    { "type": "ORB", "x": 1650, "y": 450, "orbType": "YELLOW" },
+    { "type": "ORB", "x": 3600, "y": 280, "orbType": "YELLOW" }
+  ],
+  "coins": [
+    { "type": "COIN", "x": 1948, "y": 358, "id": 1 },
+    { "type": "COIN", "x": 2898, "y": 323, "id": 2 },
+    { "type": "COIN", "x": 4760, "y": 250, "id": 3 }
+  ]
+}

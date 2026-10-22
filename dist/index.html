@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neon Dash - Rhythm Platformer (Fase 5 Visual Polish & UI/UX)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="/assets/index-CYkZKMn4.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-0ytETpsk.css">
+</head>
+<body>
+  <!-- Banner Flotante de Desbloqueo de Audio -->
+  <div id="audioUnlockBanner" class="floating-audio-banner">
+    <div class="audio-banner-inner">
+      <span class="audio-pulse-icon">🔊</span>
+      <span class="audio-banner-text">MÚSICA Y EFECTOS DISPONIBLES</span>
+      <button id="activateAudioBtn" class="btn-neon-action primary-btn">ACTIVAR AUDIO</button>
+    </div>
+  </div>
+
+  <!-- Contenedor de Notificaciones Toast Flotantes (Esquina Inferior Derecha) -->
+  <div id="toastContainer" class="toast-stack-container">
+    <div id="achievementToast" class="toast-card hidden">
+      <div class="toast-icon-wrapper" id="toastIcon">🏆</div>
+      <div class="toast-content">
+        <span class="toast-category">¡LOGRO DESBLOQUEADO!</span>
+        <span class="toast-headline" id="toastDesc">Primer Impulso</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="app" class="app-viewport">
+    <!-- Barra de Navegación Superior -->
+    <header class="top-nav-bar">
+      <div class="nav-brand-group">
+        <button id="menuBtn" class="nav-icon-btn" title="Menú Principal">
+          <span class="hamburger-icon">☰</span>
+          <span class="nav-btn-text">MENÚ</span>
+        </button>
+        <div class="brand-title">
+          <span class="brand-text">NEON</span><span class="brand-highlight">DASH</span>
+        </div>
+        <div id="difficultyBadge" class="diff-badge diff-normal" title="Dificultad del Nivel">
+          <span class="diff-dot">🟢</span>
+          <span id="diffLabel" class="diff-txt">NORMAL</span>
+        </div>
+      </div>
+
+      <!-- Barra de Progreso Central en Header -->
+      <div class="nav-progress-module">
+        <div class="progress-labels">
+          <span class="progress-sub">PROGRESO DEL NIVEL</span>
+          <span id="progressDisplay" class="progress-percentage">0%</span>
+        </div>
+        <div class="progress-track-outer">
+          <div id="progressBarFill" class="progress-fill-gradient" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <!-- Controles de Usuario y Audio -->
+      <div class="nav-user-group">
+        <button id="userAuthBtn" class="user-profile-badge" title="Cuenta de Jugador">
+          <span class="user-avatar-mini">👤</span>
+          <span id="userBadgeText" class="user-name-txt">INVITADO</span>
+        </button>
+        <button id="audioToggleBtn" class="audio-toggle-btn" title="Silenciar / Activar Música">
+          <span id="audioIcon">🔊</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Toolbar del Modo Práctica (Flotante) -->
+    <div id="practiceBar" class="practice-floating-panel hidden">
+      <div class="practice-pill-title">MODO PRÁCTICA</div>
+      <div class="practice-actions">
+        <button id="addCheckpointBtn" class="btn-practice add-cp">
+          <span>➕</span> Checkpoint <kbd>Z</kbd>
+        </button>
+        <button id="delCheckpointBtn" class="btn-practice del-cp">
+          <span>✖</span> Borrar <kbd>X</kbd>
+        </button>
+      </div>
+      <div class="cp-indicator">
+        Puntos: <strong id="checkpointCount">0</strong>
+      </div>
+    </div>
+
+    <!-- Toolbar del Editor de Niveles (Categorizado y Modular) -->
+    <div id="editorBar" class="editor-dock-panel hidden">
+      <div class="editor-groups-container">
+        <!-- Grupo 1: Plataformas y Obstáculos -->
+        <div class="tool-category">
+          <span class="cat-label">TERRENO</span>
+          <div class="tool-buttons-row">
+            <button class="tool-chip active" data-tool="BLOCK" title="Bloque Sólido">🧱 Bloque</button>
+            <button class="tool-chip" data-tool="SPIKE" title="Pincho de Suelo">▲ Pincho</button>
+            <button class="tool-chip" data-tool="SPIKE_FLIPPED" title="Pincho de Techo">▼ Invertido</button>
+          </div>
+        </div>
+
+        <!-- Grupo 2: Portales de Gravedad y Velocidad -->
+        <div class="tool-category">
+          <span class="cat-label">PORTALES</span>
+          <div class="tool-buttons-row">
+            <button class="tool-chip orange-chip" data-tool="PORTAL_GRAV_INV" title="Gravedad al Techo">🌀 Grav -1</button>
+            <button class="tool-chip blue-chip" data-tool="PORTAL_GRAV_NORM" title="Gravedad al Suelo">🌀 Grav +1</button>
+            <button class="tool-chip green-chip" data-tool="PORTAL_SPEED_2" title="Velocidad 2x">⚡ 2x</button>
+            <button class="tool-chip pink-chip" data-tool="PORTAL_SPEED_3" title="Velocidad 3x">⚡ 3x</button>
+            <button class="tool-chip amber-chip" data-tool="PORTAL_SPEED_05" title="Velocidad 0.5x">⚡ 0.5x</button>
+            <button class="tool-chip magenta-chip" data-tool="PORTAL_SHIP" title="Portal Modo Nave / Avioncito">🚀 Nave</button>
+            <button class="tool-chip neon-chip" data-tool="PORTAL_CUBE" title="Portal Modo Cubo Normal">🟩 Cubo</button>
+          </div>
+        </div>
+
+        <!-- Grupo 3: Coleccionables e Interacción -->
+        <div class="tool-category">
+          <span class="cat-label">OBJETOS</span>
+          <div class="tool-buttons-row">
+            <button class="tool-chip gold-chip" data-tool="ORB_YELLOW" title="Orbe de Salto">🟡 Orbe</button>
+            <button class="tool-chip coin-chip" data-tool="SECRET_COIN" title="Moneda Secreta">🪙 Moneda</button>
+            <button class="tool-chip danger-chip" data-tool="ERASE" title="Borrar Elemento">❌ Borrar</button>
+          </div>
+        </div>
+
+        <!-- Grupo 4: Acciones y Navegación -->
+        <div class="tool-category">
+          <span class="cat-label">ACCIONES</span>
+          <div class="tool-buttons-row">
+            <button id="panLeftBtn" class="action-chip" title="Mover Vista a la Izquierda">◀ Pan</button>
+            <button id="panRightBtn" class="action-chip" title="Mover Vista a la Derecha">Pan ▶</button>
+            <button id="exportJsonBtn" class="action-chip" title="Exportar JSON">💾 Exportar</button>
+            <button id="importJsonBtn" class="action-chip" title="Importar JSON">📂 Importar</button>
+            <button id="publishCommunityBtn" class="action-chip purple-btn" title="Subir a la Comunidad">🌐 Publicar</button>
+            <button id="clearLevelBtn" class="action-chip danger-btn" title="Vaciar Mapa">🗑 Limpiar</button>
+            <button id="playLevelBtn" class="action-chip play-btn" title="Probar Nivel">▶ Jugar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Escenario Principal del Juego (Canvas Centrado) -->
+    <main class="game-stage-container">
+      <div class="canvas-glow-wrapper">
+        <!-- Floating HUD Overlay dentro del Canvas -->
+        <div class="in-game-hud-overlay">
+          <div class="hud-stat-pill" title="Monedas Secretas Recolectadas">
+            <span class="hud-icon">🪙</span>
+            <span id="coinsDisplay" class="hud-value glow-gold">0/3</span>
+          </div>
+          <div class="hud-stat-pill" title="Velocidad Actual">
+            <span class="hud-icon">⚡</span>
+            <span id="speedDisplay" class="hud-value glow-speed">1x</span>
+          </div>
+          <div class="hud-stat-pill" title="Dirección de la Gravedad">
+            <span class="hud-icon">🌀</span>
+            <span id="gravityDisplay" class="hud-value glow-cyan">NORMAL</span>
+          </div>
+          <div class="hud-stat-pill" title="Contador de Intentos">
+            <span class="hud-label">INTENTO</span>
+            <span id="attemptDisplay" class="hud-value glow-yellow">1</span>
+          </div>
+        </div>
+
+        <!-- Canvas de Renderizado 1280x720 -->
+        <canvas id="gameCanvas" width="1280" height="720"></canvas>
+        <div id="deathFlash" class="death-flash-overlay"></div>
+
+        <!-- Overlays y Modales In-Canvas -->
+        
+        <!-- Menú Principal: Selector de Niveles Oficiales Estilo Geometry Dash -->
+        <!-- Menú Principal: Selector de Niveles Oficiales Estilo Geometry Dash Clásico -->
+        <div id="mainMenuOverlay" class="gd-menu-overlay">
+          <!-- Decoración de Fondo Dinámica Estilo Geometry Dash -->
+          <div class="gd-bg-pattern-layer"></div>
+
+          <!-- Cabecera Superior del Menú -->
+          <div class="gd-menu-header">
+            <div class="gd-title-wrapper">
+              <h1 class="gd-main-title">NEON <span class="gd-title-glow">DASH</span></h1>
+              <span id="gdLevelSubtitle" class="gd-subtitle">NIVELES OFICIALES • MODO HISTORIA</span>
+            </div>
+          </div>
+
+          <!-- Slider / Carrusel Central a Pantalla Completa con Flechas Laterales Grandes -->
+          <div class="gd-carousel-container">
+            <button id="prevLevelBtn" class="gd-nav-arrow gd-arrow-left" title="Nivel Anterior" aria-label="Nivel Anterior">
+              <span class="arrow-shape">‹</span>
+            </button>
+
+            <!-- Tarjeta Central de Nivel -->
+            <div class="gd-level-card" id="levelCardMain">
+              <!-- Parte Superior: Título Grande -->
+              <div class="gd-card-top-title">
+                <span id="cardLevelNumber" class="gd-level-index">NIVEL 1</span>
+                <h2 id="cardLevelTitle" class="gd-level-name">STEREO MADNESS</h2>
+              </div>
+
+              <!-- Fila Central: Cara de Dificultad, Botón Play Central y Estrellas -->
+              <div class="gd-card-center-row">
+                <!-- Izquierda: Cara de Dificultad -->
+                <div class="gd-diff-container" id="cardDiffBadge">
+                  <div class="gd-diff-icon-face" id="cardDiffIcon">🔵</div>
+                  <span id="cardDiffText" class="gd-diff-label">FÁCIL</span>
+                </div>
+
+                <!-- Centro: Botón Play Gigante -->
+                <button id="cardPlayBtn" class="gd-main-play-btn" title="Iniciar Nivel en Modo Normal">
+                  <span class="gd-play-triangle">▶</span>
+                </button>
+
+                <!-- Derecha: Estrellas -->
+                <div class="gd-stars-container" id="cardStarsBadge">
+                  <span class="gd-stars-icon">⭐</span>
+                  <span id="cardStarsText" class="gd-stars-count">1</span>
+                  <span class="gd-stars-label">ESTRELLAS</span>
+                </div>
+              </div>
+
+              <!-- Dos Barras de Progreso Independientes (NORMAL MODE & PRACTICE MODE) -->
+              <div class="gd-progress-dual-container">
+                <!-- Barra 1: NORMAL MODE -->
+                <div class="gd-progress-bar-module" id="normalBarModule" title="Modo Normal">
+                  <div class="gd-bar-header">
+                    <span class="gd-mode-tag">NORMAL MODE</span>
+                    <span id="cardNormalPct" class="gd-pct-text">0%</span>
+                  </div>
+                  <div class="gd-bar-track">
+                    <div id="cardNormalBarFill" class="gd-bar-fill normal-fill" style="width: 0%;"></div>
+                  </div>
+                </div>
+
+                <!-- Barra 2: PRACTICE MODE -->
+                <div class="gd-progress-bar-module" id="practiceBarModule" title="Modo Práctica (Haz clic para practicar)">
+                  <div class="gd-bar-header">
+                    <div class="gd-practice-label-group">
+                      <span class="gd-mode-tag practice-tag">PRACTICE MODE</span>
+                      <button id="cardPracticeBtn" class="gd-practice-launch-btn" title="Jugar en Modo Práctica">◈ PRACTICAR</button>
+                    </div>
+                    <span id="cardPracticePct" class="gd-pct-text practice-pct">0%</span>
+                  </div>
+                  <div class="gd-bar-track">
+                    <div id="cardPracticeBarFill" class="gd-bar-fill practice-fill" style="width: 0%;"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Esquina Inferior: Velocidad y Monedas Secretas -->
+              <div class="gd-card-footer-row">
+                <div class="gd-speed-indicator">
+                  <span class="gd-speed-icon">⚡</span>
+                  <span id="cardSpeedText">1.0x</span>
+                </div>
+                <div class="gd-coins-display-box" title="3 Monedas Secretas">
+                  <span class="gd-coins-tag">MONEDAS:</span>
+                  <div class="coin-slot" id="cardCoin1" title="Moneda Secreta 1">🪙</div>
+                  <div class="coin-slot" id="cardCoin2" title="Moneda Secreta 2">🪙</div>
+                  <div class="coin-slot" id="cardCoin3" title="Moneda Secreta 3">🪙</div>
+                </div>
+              </div>
+            </div>
+
+            <button id="nextLevelBtn" class="gd-nav-arrow gd-arrow-right" title="Nivel Siguiente" aria-label="Nivel Siguiente">
+              <span class="arrow-shape">›</span>
+            </button>
+          </div>
+
+          <!-- Indicadores Inferiores de Paginación (Puntos) -->
+          <div class="gd-pagination-dots-row" id="carouselDots"></div>
+
+            <!-- Botones Secundarios del Menú -->
+            <div class="menu-secondary-actions">
+              <button id="openCommunityBtn" class="menu-sub-btn community-glow">
+                <span>🌐</span> COMUNIDAD
+              </button>
+              <button id="openEditorBtn" class="menu-sub-btn editor-glow">
+                <span>🛠</span> EDITOR
+              </button>
+              <button id="openLeaderboardBtn" class="menu-sub-btn leaderboard-glow">
+                <span>🏆</span> RÉCORDS
+              </button>
+              <button id="openAchievementsBtn" class="menu-sub-btn achievements-glow">
+                <span>⭐</span> LOGROS
+              </button>
+              <button id="openWardrobeBtn" class="menu-sub-btn wardrobe-glow">
+                <span>👕</span> ARMARIO
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal de Autenticación (Login / Registro) -->
+        <div id="authModal" class="glass-overlay hidden">
+          <div class="modal-dialog-card">
+            <div class="modal-dialog-header">
+              <h3 id="authTitle">AUTENTICACIÓN DE JUGADOR</h3>
+              <button id="closeAuthBtn" class="modal-close-trigger">✖</button>
+            </div>
+            <div class="auth-segment-switch">
+              <button id="tabLoginBtn" class="segment-btn active">INICIAR SESIÓN</button>
+              <button id="tabRegisterBtn" class="segment-btn">CREAR CUENTA</button>
+            </div>
+            <form id="authForm" class="dialog-form">
+              <div class="input-field-group">
+                <label for="authUsername">NOMBRE DE USUARIO</label>
+                <input type="text" id="authUsername" placeholder="Ej: NeonRider" required autocomplete="username" />
+              </div>
+              <div class="input-field-group">
+                <label for="authPassword">CONTRASEÑA</label>
+                <input type="password" id="authPassword" placeholder="••••••••" required autocomplete="current-password" />
+              </div>
+              <div id="authErrorMsg" class="dialog-error-box hidden"></div>
+              <button type="submit" id="authSubmitBtn" class="menu-action-btn primary-glow">INGRESAR</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Modal de Perfil de Usuario -->
+        <div id="profileModal" class="glass-overlay hidden">
+          <div class="modal-dialog-card profile-dialog">
+            <div class="modal-dialog-header">
+              <h3>PERFIL DE JUGADOR</h3>
+              <button id="closeProfileBtn" class="modal-close-trigger">✖</button>
+            </div>
+            <div class="user-hero-card">
+              <div class="user-avatar-cube">👤</div>
+              <div class="user-hero-meta">
+                <h4 id="profileUsername" class="hero-username">Usuario</h4>
+                <span class="hero-rank">Rango Oficial: Piloto Neón</span>
+              </div>
+            </div>
+            <div class="stats-dashboard-grid">
+              <div class="dashboard-stat-tile">
+                <span class="stat-tile-label">SALTOS TOTALES</span>
+                <span id="profileJumps" class="stat-tile-num glow-cyan">0</span>
+              </div>
+              <div class="dashboard-stat-tile">
+                <span class="stat-tile-label">INTENTOS</span>
+                <span id="profileAttempts" class="stat-tile-num glow-yellow">0</span>
+              </div>
+              <div class="dashboard-stat-tile">
+                <span class="stat-tile-label">ESTRELLAS</span>
+                <span id="profileStars" class="stat-tile-num glow-gold">⭐ 0</span>
+              </div>
+              <div class="dashboard-stat-tile">
+                <span class="stat-tile-label">MONEDAS SECRETAS</span>
+                <span id="profileCoins" class="stat-tile-num glow-gold">🪙 0</span>
+              </div>
+            </div>
+            <button id="logoutBtn" class="menu-action-btn danger-glow">CERRAR SESIÓN</button>
+          </div>
+        </div>
+
+        <!-- Modal de Clasificación Global (Leaderboard) -->
+        <div id="leaderboardModal" class="glass-overlay hidden">
+          <div class="modal-dialog-card wide-dialog">
+            <div class="modal-dialog-header">
+              <h3>🏆 CLASIFICACIÓN GLOBAL (TOP RÉCORDS)</h3>
+              <button id="closeLeaderboardBtn" class="modal-close-trigger">✖</button>
+            </div>
+            <div class="leaderboard-table-viewport">
+              <table class="neon-data-table">
+                <thead>
+                  <tr>
+                    <th>RANGO</th>
+                    <th>JUGADOR</th>
+                    <th>MEJOR %</th>
+                    <th>TIEMPO</th>
+                    <th>MONEDAS</th>
+                  </tr>
+                </thead>
+                <tbody id="leaderboardTbody">
+                  <tr><td colspan="5" class="table-loading-msg">No hay récords registrados todavía</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal de Comunidad de Niveles -->
+        <div id="communityModal" class="glass-overlay hidden">
+          <div class="modal-dialog-card wide-dialog">
+            <div class="modal-dialog-header">
+              <h3>🌐 NIVELES DE LA COMUNIDAD</h3>
+              <button id="closeCommunityBtn" class="modal-close-trigger">✖</button>
+            </div>
+            <div class="community-query-bar">
+              <input type="text" id="communitySearchInput" placeholder="Buscar por título, creador o #ID..." class="neon-input-search" />
+              <div class="filter-pill-stack">
+                <button class="filter-chip active" data-sort="top">🔥 Más Populares</button>
+                <button class="filter-chip" data-sort="recent">🕒 Más Recientes</button>
+                <button class="filter-chip" data-sort="rating">⭐ Mejor Valorados</button>
+                <button class="filter-chip" data-sort="plays">🎮 Más Jugados</button>
+              </div>
+            </div>
+            <div class="community-cards-scroll" id="communityLevelsList">
+              <div class="table-loading-msg">Cargando niveles comunitarios...</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal de Logros (Achievements) -->
+        <div id="achievementsModal" class="glass-overlay hidden">
+          <div class="modal-dialog-card wide-dialog">
+            <div class="modal-dialog-header">
+              <h3>⭐ SISTEMA DE LOGROS</h3>
+              <button id="closeAchievementsBtn" class="modal-close-trigger">✖</button>
+            </div>
+            <div class="achievements-card-grid" id="achievementsGrid">
+              <div class="table-loading-msg">Cargando catálogo de logros...</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal de Armario de Skins (Icon Kit) -->
+        <div id="wardrobeModal" class="glass-overlay hidden">
+          <div class="modal-dialog-card wardrobe-dialog">
+            <div class="modal-dialog-header">
+              <h3>👕 ARMARIO DE SKINS / ICON KIT</h3>
+              <button id="closeWardrobeBtn" class="modal-close-trigger">✖</button>
+            </div>
+
+            <div class="wardrobe-workbench-layout">
+              <!-- Vista previa central -->
+              <div class="workbench-cube-preview">
+                <div class="preview-canvas-mount">
+                  <canvas id="skinPreviewCanvas" width="160" height="160"></canvas>
+                </div>
+                <div class="preview-cube-badge" id="previewSkinName">CLASSIC CUBE</div>
+              </div>
+
+              <!-- Controles de Personalización -->
+              <div class="workbench-customizers">
+                <div class="customizer-block">
+                  <label>MODELO DE ICONO</label>
+                  <div class="chips-selector-row" id="skinSelectorRow">
+                    <button class="skin-icon-btn active" data-icon="CLASSIC">Classic</button>
+                    <button class="skin-icon-btn" data-icon="NINJA">Ninja</button>
+                    <button class="skin-icon-btn" data-icon="CYCLOPS">Cyclops</button>
+                    <button class="skin-icon-btn" data-icon="ROBOT">Robot</button>
+                    <button class="skin-icon-btn" data-icon="DIAMOND">Diamond</button>
+                    <button class="skin-icon-btn" data-icon="GLITCH">Glitch</button>
+                  </div>
+                </div>
+
+                <div class="customizer-block">
+                  <div class="palette-label-group">
+                    <label>COLOR PRIMARIO (CUERPO)</label>
+                    <div class="picker-inline-wrapper">
+                      <input type="color" id="primaryColorPicker" value="#39ff14" class="custom-color-input" title="Selector libre de color primario" />
+                      <span class="picker-hint-txt">Libre</span>
+                    </div>
+                  </div>
+                  <div class="color-swatches-row" id="primaryColorPalette"></div>
+                </div>
+
+                <div class="customizer-block">
+                  <div class="palette-label-group">
+                    <label>COLOR SECUNDARIO (DETALLES Y OJOS)</label>
+                    <div class="picker-inline-wrapper">
+                      <input type="color" id="secondaryColorPicker" value="#ffe600" class="custom-color-input" title="Selector libre de color secundario" />
+                      <span class="picker-hint-txt">Libre</span>
+                    </div>
+                  </div>
+                  <div class="color-swatches-row" id="secondaryColorPalette"></div>
+                </div>
+
+                <div class="customizer-block">
+                  <label>EFECTO DE ESTELA Y PARTÍCULAS (TRAIL)</label>
+                  <div class="trail-chips-row" id="trailSelectorRow"></div>
+                </div>
+
+                <div class="wardrobe-info-banner" id="wardrobeItemInfo">
+                  <span class="info-icon" id="wardrobeInfoIcon">✨</span>
+                  <span class="info-text" id="wardrobeInfoText">Personaliza tu cubo y sus estelas luminosas en tiempo real.</span>
+                </div>
+              </div>
+            </div>
+
+            <button id="saveWardrobeBtn" class="menu-action-btn primary-glow">GUARDAR Y SALIR</button>
+          </div>
+        </div>
+
+        <!-- Modal de Exportar / Importar JSON del Editor -->
+        <div id="jsonModal" class="glass-overlay hidden">
+          <div class="modal-dialog-card">
+            <div class="modal-dialog-header">
+              <h3 id="jsonModalTitle">NIVEL JSON</h3>
+              <button id="closeJsonModalBtn" class="modal-close-trigger">✖</button>
+            </div>
+            <textarea id="jsonTextArea" rows="12" spellcheck="false" class="json-code-box"></textarea>
+            <div class="dialog-actions-row">
+              <button id="jsonApplyBtn" class="menu-action-btn primary-glow">CARGAR / APLICAR NIVEL</button>
+              <button id="jsonDownloadBtn" class="menu-action-btn secondary-glow">DESCARGAR .JSON</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pantalla de Victoria (100% Completado) -->
+        <div id="victoryOverlay" class="glass-overlay hidden">
+          <div class="menu-modal-card victory-card-glow">
+            <div class="victory-header">
+              <span class="victory-sub">¡NIVEL COMPLETADO!</span>
+              <h3 id="victoryLevelName" class="victory-level-headline">Stereo Madness</h3>
+              <div class="victory-percentage-hero">100%</div>
+            </div>
+            <div class="victory-metrics-box">
+              <div class="metric-row">
+                <span>INTENTOS REALIZADOS:</span>
+                <strong id="victoryAttempts" class="glow-yellow">1</strong>
+              </div>
+              <div class="metric-row">
+                <span>TIEMPO TOTAL:</span>
+                <strong id="victoryTime" class="glow-speed">0.00s</strong>
+              </div>
+              <div class="metric-row">
+                <span>MONEDAS SECRETAS:</span>
+                <strong id="victoryCoins" class="glow-gold">🪙 3/3</strong>
+              </div>
+              <div class="metric-row sync-status-row">
+                <span>ESTADO EN LA NUBE:</span>
+                <strong id="victorySyncStatus" class="glow-cyan">Récord guardado</strong>
+              </div>
+            </div>
+            <div class="menu-nav-stack">
+              <button id="victoryNextBtn" class="menu-action-btn primary-glow">
+                <span class="btn-symbol">▶</span> SIGUIENTE NIVEL
+              </button>
+              <button id="victoryReplayBtn" class="menu-action-btn secondary-glow">
+                <span class="btn-symbol">🔄</span> REPETIR NIVEL
+              </button>
+              <button id="victoryMenuBtn" class="menu-action-btn secondary-glow">
+                <span class="btn-symbol">📋</span> SELECCIÓN DE NIVELES
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Barra de Instrucciones Inferior -->
+    <footer class="bottom-controls-bar">
+      <div class="instructions-caps">
+        <kbd class="key-pill">ESPACIO</kbd>
+        <kbd class="key-pill">▲</kbd>
+        <kbd class="key-pill">W</kbd>
+        <span class="hint-connector">o</span>
+        <kbd class="key-pill">CLIC / TOQUE</kbd>
+        <span class="hint-description">para Saltar • Sincronización Rítmica y Físicas Activas</span>
+      </div>
+      <div class="live-status-pill">
+        <span class="status-pulse-dot"></span>
+        <span id="engineStatus">Neon Dash • Motor 60 Hz • UI/UX Pro</span>
+      </div>
+    </footer>
+  </div>
+
+</body>
+</html>
